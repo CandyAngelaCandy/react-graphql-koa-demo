@@ -2,6 +2,7 @@ const Koa = require('koa');
 const mount = require('koa-mount');
 const graphqlHTTP = require('koa-graphql');
 const { buildSchema } = require('graphql');
+var cors = require('koa2-cors');
 
 // 使用 GraphQL schema language 构建一个 schema
 const schema = buildSchema(`
@@ -19,6 +20,7 @@ const schema = buildSchema(`
  
   type Query {
     getMessage(id: ID!): Message
+    hello: String
   }
   
   type Mutation {
@@ -39,6 +41,7 @@ class Message {
 let fakeDatabase = {};
 
 let root = {
+    hello: () => 'Hello world!',
     getMessage: function ({id}) {
         if (!fakeDatabase[id]) {
             throw new Error('no message exists with id ' + id);
@@ -63,6 +66,10 @@ let root = {
 };
 
 const app = new Koa();
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+}));
 
 app.use(mount('/graphql', graphqlHTTP({
     schema: schema,
