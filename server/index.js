@@ -2,11 +2,10 @@ const Koa = require('koa');
 const mount = require('koa-mount');
 const graphqlHTTP = require('koa-graphql');
 const { buildSchema } = require('graphql');
-var cors = require('koa2-cors');
+const cors = require('koa2-cors');
 
 // 使用 GraphQL schema language 构建一个 schema
 const schema = buildSchema(`
-  
   input MessageInput {
     content: String
     author: String
@@ -21,6 +20,7 @@ const schema = buildSchema(`
   type Query {
     getMessage(id: ID!): Message
     hello: String
+    Messages: [Message]
   }
   
   type Mutation {
@@ -39,6 +39,7 @@ class Message {
 }
 // root 将会提供每个 API 入口端点的解析函数
 let fakeDatabase = {};
+let messages=[];
 
 let root = {
     hello: () => 'Hello world!',
@@ -50,9 +51,11 @@ let root = {
     },
     createMessage: function ({input}) {
         // Create a random id for our "database".
-        var id = require('crypto').randomBytes(10).toString('hex');
-
+        let id = require('crypto').randomBytes(10).toString('hex');
+        
         fakeDatabase[id] = input;
+        let message=new Message(id, input);
+        messages.push(message);
         return new Message(id, input);
     },
     updateMessage: function ({id, input}) {
@@ -62,6 +65,12 @@ let root = {
         // This replaces all old data, but some apps might want partial update.
         fakeDatabase[id] = input;
         return new Message(id, input);
+    },
+    Messages: function () {
+        if (messages.length === 0) {
+            throw new Error('no messages exists');
+        }
+        return messages;
     }
 };
 
