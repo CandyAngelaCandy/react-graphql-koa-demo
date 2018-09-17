@@ -1,4 +1,13 @@
-const {GraphQLBoolean, GraphQLList, GraphQLID, GraphQLNonNull, GraphQLObjectType, GraphQLInputObjectType, GraphQLSchema, GraphQLString} = require('graphql');
+import {
+    GraphQLBoolean,
+    GraphQLList,
+    GraphQLID,
+    GraphQLNonNull,
+    GraphQLObjectType,
+    GraphQLInputObjectType,
+    GraphQLSchema,
+    GraphQLString
+} from 'graphql';
 
 class Todo {
     constructor(id, {text, taskItems}) {
@@ -53,13 +62,16 @@ var queryType = new GraphQLObjectType({
             args: {
                 id: {type: GraphQLNonNull(GraphQLID)}
             },
-            resolve: function (_, {id}) {
-                return fakeDatabase[id];
+            resolve: (_, {id}) => {
+                console.log("id",id);
+                console.log("fakeDatabase",fakeDatabase);
+                console.log("fakeDatabase[id]",fakeDatabase[id]);
+                return new Todo(id,fakeDatabase[id]);
             }
         },
         getTodos: {
             type: new GraphQLList(todoType),
-            resolve: function () {
+            resolve: () => {
                 if (todos.length === 0) {
                     throw new Error('no todos exists');
                 }
@@ -79,7 +91,7 @@ var mutationType = new GraphQLObjectType({
             args: {
                 input: {type: TodoInput}
             },
-            resolve: function (_, {input}) {
+            resolve: (_, {input}) => {
                 let id = uuid();
                 input.completed = false;
                 input.editable = false;
@@ -98,14 +110,14 @@ var mutationType = new GraphQLObjectType({
                 id: {type: GraphQLID},
                 input: {type: TodoInput}
             },
-            resolve: function (_, {id, input}) {
+            resolve: (_, {id, input}) => {
                 if (!fakeDatabase[id]) {
                     throw new Error('no todo exists with id ' + id);
                 }
                 // This replaces all old data, but some apps might want partial update.
                 fakeDatabase[id] = input;
                 todos.filter((todo) =>
-                    todo.id === id
+                    todo.id == id
                 ).map((todo) => {
                     todo.text = input.text;
                     todo.taskItems = input.taskItems;
@@ -118,13 +130,13 @@ var mutationType = new GraphQLObjectType({
             args: {
                 id: {type: GraphQLID}
             },
-            resolve: function (_, {id}) {
+            resolve: (_, {id}) => {
                 if (!fakeDatabase[id]) {
                     throw new Error('no todo exists with id ' + id);
                 }
 
                 todos = todos.filter((todo) =>
-                    todo.id !== id
+                    todo.id != id
                 );
                 console.log("behind delete", todos);
                 return new Todo(id, fakeDatabase[id]);
