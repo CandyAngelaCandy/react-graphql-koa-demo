@@ -26,7 +26,7 @@ class AddMessage extends Component {
       })
       .then(res => {
         console.log(res, '成功啦');
-      });
+      })
   };
 
   handleContent = event => {
