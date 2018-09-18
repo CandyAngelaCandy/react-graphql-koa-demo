@@ -10,7 +10,7 @@
     ]
   },
   "scripts": {
-    "start": "babel-node src/db1.js",
+    "start": "babel-node src/index.js",
     "build": "babel lib -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

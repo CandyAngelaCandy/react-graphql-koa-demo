@@ -2,7 +2,7 @@ import Koa from 'koa';
 import mount from 'koa-mount';
 import graphqlHTTP from 'koa-graphql';
 import cors from 'koa2-cors';
-import schema from './schema';
+import schema from './schema/schema';
 
 const app = new Koa();
 
