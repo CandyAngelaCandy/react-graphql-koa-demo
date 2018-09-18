@@ -1,4 +1,4 @@
-import Todo from "../db/models/Todo";
+import {Todo} from "../db/models/Todo";
 
 export let getTodo = (_, {id}) => {
     (async () => {
@@ -17,7 +17,7 @@ export let getTodo = (_, {id}) => {
 
 export let getTodos = () => {
     (async () => {
-        let todos = await Todo.findAll();
+        let todos = await Todo.findAll({ include : ['task'] });
         console.log(`find ${todos.length} todo:`);
         for (let todo of todos) {
             console.log(JSON.stringify(todo));

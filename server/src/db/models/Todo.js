@@ -1,20 +1,36 @@
 import {Sequelize} from "sequelize";
 import sequelize from "../connection";
 
-let Todo = sequelize.define('todos', {
+export let Todo = sequelize.define('todos', {
     id: {
         type: Sequelize.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
     },
     text: Sequelize.STRING(100),
     completed: Sequelize.BOOLEAN,
     editable: Sequelize.BOOLEAN,
     visible: Sequelize.BOOLEAN,
     deleted: Sequelize.BOOLEAN,
-    time:Sequelize.DATE,
-    userid:Sequelize.INTEGER
+    time: Sequelize.DATE,
+    userid: Sequelize.INTEGER
 }, {
     timestamps: false
 });
 
-export default Todo;
+export let Task = sequelize.define('tasks', {
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+    },
+    text: Sequelize.STRING(100),
+    todoId: Sequelize.INTEGER
+}, {
+    timestamps: false
+});
+
+Todo.hasMany(Task, {as: 'task', foreignKey: 'todoId'});
+Task.belongsTo(Todo, {foreignKey: 'todoId'});
