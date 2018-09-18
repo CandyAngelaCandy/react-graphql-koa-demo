@@ -10,7 +10,7 @@
     ]
   },
   "scripts": {
-    "start": "babel-node src/index.js",
+    "start": "babel-node src/db1.js",
     "build": "babel lib -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,7 +22,9 @@
     "koa-graphql": "^0.7.5",
     "koa-mount": "^3.0.0",
     "koa2-cors": "^2.0.6",
-    "prettier": "^1.14.2"
+    "mysql2": "^1.6.1",
+    "prettier": "^1.14.2",
+    "sequelize": "^4.38.1"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
