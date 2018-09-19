@@ -5,6 +5,5 @@
      `editable` BOOLEAN,
      `visible` BOOLEAN,
      `deleted` BOOLEAN default false,
-    `time` date,
-    `userid` int
+    `time` date
  );

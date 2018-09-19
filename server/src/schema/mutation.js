@@ -1,6 +1,6 @@
 import {TodoInput, todoType} from './type';
-import {GraphQLID, GraphQLObjectType} from 'graphql';
-import {createTodo,updateTodo,deleteTodo} from './resolve';
+import {GraphQLID, GraphQLObjectType, GraphQLList} from 'graphql';
+import {createTodo, updateTodo, deleteTodo} from './resolve';
 
 const mutationType = new GraphQLObjectType({
     name: 'RootMutationType',
@@ -13,7 +13,7 @@ const mutationType = new GraphQLObjectType({
             resolve: createTodo
         },
         updateTodo: {
-            type: todoType,
+            type: new GraphQLList(todoType),
             args: {
                 id: {type: GraphQLID},
                 input: {type: TodoInput}
@@ -21,7 +21,7 @@ const mutationType = new GraphQLObjectType({
             resolve: updateTodo
         },
         deleteTodo: {
-            type: todoType,
+            type: new GraphQLList(todoType),
             args: {
                 id: {type: GraphQLID}
             },

@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Hello from './component/Hello';
-import AddMessage from './component/AddMessage';
-import MessageList from './component/MessageList';
+import Todos from './component/Todo';
+import NumbersWithData from './component/Compose';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <div className="App-intro">
-          <Hello />
-          <AddMessage />
-          <MessageList />
-        </div>
+      <div className="offset-md-3 col-md-8">
+        <Todos />
       </div>
     );
   }

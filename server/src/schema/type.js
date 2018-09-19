@@ -3,7 +3,6 @@ import {
     GraphQLBoolean,
     GraphQLID,
     GraphQLInputObjectType,
-    GraphQLList,
     GraphQLNonNull,
     GraphQLObjectType,
     GraphQLString
@@ -17,15 +16,21 @@ export const todoType = new GraphQLObjectType({
         completed: {type: GraphQLBoolean},
         editable: {type: GraphQLBoolean},
         visible: {type: GraphQLBoolean},
-        time: {type: GraphQLString},
-        taskItems: {type: new GraphQLList(GraphQLString)}
+        deleted: {type: GraphQLBoolean},
+        time: {type: GraphQLString}
     }
 });
+
+
 
 export const TodoInput = new GraphQLInputObjectType({
     name: 'TodoInput',
     fields: {
         text: {type: GraphQLString},
-        taskItems: {type: new GraphQLList(GraphQLString)}
+        completed: {type: GraphQLBoolean},
+        editable: {type: GraphQLBoolean},
+        visible: {type: GraphQLBoolean},
+        deleted: {type: GraphQLBoolean},
+        time: {type: GraphQLString}
     }
 });

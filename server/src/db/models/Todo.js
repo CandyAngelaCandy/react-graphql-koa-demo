@@ -14,23 +14,22 @@ export let Todo = sequelize.define('todos', {
     visible: Sequelize.BOOLEAN,
     deleted: Sequelize.BOOLEAN,
     time: Sequelize.DATE,
-    userid: Sequelize.INTEGER
 }, {
     timestamps: false
 });
 
-export let Task = sequelize.define('tasks', {
-    id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false
-    },
-    text: Sequelize.STRING(100),
-    todoId: Sequelize.INTEGER
-}, {
-    timestamps: false
-});
-
-Todo.hasMany(Task, {as: 'task', foreignKey: 'todoId'});
-Task.belongsTo(Todo, {foreignKey: 'todoId'});
+// export let Task = sequelize.define('tasks', {
+//     id: {
+//         type: Sequelize.INTEGER,
+//         primaryKey: true,
+//         autoIncrement: true,
+//         allowNull: false
+//     },
+//     text: Sequelize.STRING(100),
+//     todoId: Sequelize.INTEGER
+// }, {
+//     timestamps: false
+// });
+//
+// Todo.hasMany(Task, {as: 'task', foreignKey: 'todoId'});
+// Task.belongsTo(Todo, {foreignKey: 'todoId'});
