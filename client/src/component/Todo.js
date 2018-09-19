@@ -1,42 +1,8 @@
 import React, { Fragment } from 'react';
-import gql from 'graphql-tag';
 import { Mutation, Query } from 'react-apollo';
 import TodoList from './TodoList';
 import TodoContext from './context/TodoContext';
-
-const GET_TODOS = gql`
-  query {
-    getTodos {
-      id
-      text
-      completed
-      visible
-      editable
-      deleted
-      time
-    }
-  }
-`;
-
-const QueryTwo = gql`
-  query {
-    getTodo(id: "4") {
-      id
-      text
-      completed
-    }
-  }
-`;
-
-const CREATE_TODO = gql`
-  mutation createTodo($input: TodoInput) {
-    createTodo(input: $input) {
-      id
-      text
-      completed
-    }
-  }
-`;
+import { CREATE_TODO, GET_TODOS } from './schema';
 
 const Todo = () => {
   return (
@@ -78,7 +44,12 @@ const Todo = () => {
                       input: {
                         text: this.input.value
                       }
-                    }
+                    },
+                    refetchQueries: [
+                      {
+                        query: GET_TODOS
+                      }
+                    ]
                   });
                 }}
               >

@@ -1,15 +1,7 @@
-import React, { Fragment, PureComponent } from 'react';
+import React, { Fragment } from 'react';
 import TodoContext from './context/TodoContext';
-import { Mutation, Query } from 'react-apollo';
-import gql from 'graphql-tag';
-
-const DELETE_TODO = gql`
-  mutation deleteTodo($id: ID) {
-    deleteTodo(id: $id) {
-      id
-    }
-  }
-`;
+import { Mutation } from 'react-apollo';
+import { DELETE_TODO, GET_TODOS } from './schema';
 
 const TodoList = () => {
   return (
@@ -29,6 +21,7 @@ const TodoList = () => {
             <tbody>
               {todos.map(todo => {
                 //console.log('task array -----------' + todoItem.taskItems);
+                const todoId = todo.id;
                 return (
                   <tr key={todo.id}>
                     <td className="text-center">{todo.id}</td>
@@ -79,11 +72,16 @@ const TodoList = () => {
                         {deleteTodo => (
                           <button
                             onClick={() => {
-                              alert('delete');
+                              alert('delete this todo?');
                               deleteTodo({
                                 variables: {
-                                  id: 6
-                                }
+                                  id: todoId
+                                },
+                                refetchQueries: [
+                                  {
+                                    query: GET_TODOS
+                                  }
+                                ]
                               });
                             }}
                             style={{ margin: '0 10px' }}
