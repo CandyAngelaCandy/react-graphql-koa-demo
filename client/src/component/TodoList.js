@@ -61,23 +61,55 @@ const TodoList = () => {
                             <span>{todo.text}</span>
                           </del>
                         ) : (
-                          <span
-                            contentEditable={todo.editable}
-                            onDoubleClick={() => {
-                              //this.props.editTodo(todo);
-                            }}
-                            onBlur={() => {
-                              // this.props.updateTodo(
-                              //     todo,
-                              //     this.todoContent.innerText
-                              // );
-                            }}
-                            ref={el => {
-                              this.todoContent = el;
-                            }}
-                          >
-                            {todo.text}
-                          </span>
+                          <Mutation mutation={UPDATE_TODO}>
+                            {updateTodo => (
+                              <span
+                                contentEditable={todo.editable}
+                                suppressContentEditableWarning={true}
+                                onDoubleClick={() => {
+                                  updateTodo({
+                                    variables: {
+                                      id: todoId,
+                                      input: {
+                                        editable: true
+                                      }
+                                    },
+                                    refetchQueries: [
+                                      {
+                                        query: GET_TODOS
+                                      }
+                                    ]
+                                  });
+                                }}
+                                ref={el => {
+                                  this.todoContent = el;
+                                }}
+                                onChange={() => {
+                                  console.log(
+                                    'update text change',
+                                    this.todoContent.value
+                                  );
+                                }}
+                                onBlur={e => {
+                                  updateTodo({
+                                    variables: {
+                                      id: todoId,
+                                      input: {
+                                        text: e.target.innerHTML
+                                      }
+                                    },
+                                    refetchQueries: [
+                                      {
+                                        query: GET_TODOS
+                                      }
+                                    ]
+                                  });
+                                }}
+                              >
+                                {todo.text}
+                              </span>
+                            )}
+                          </Mutation>
                         )}
                       </td>
                       <td className="text-center">{todo.time}</td>
@@ -114,17 +146,6 @@ const TodoList = () => {
                             </button>
                           )}
                         </Mutation>
-
-                        <button
-                          onClick={() => {
-                            // this.props.addTask(
-                            //     todo.id,
-                            //     this.taskInput.value
-                            // );
-                          }}
-                        >
-                          add task
-                        </button>
                       </td>
                     </tr>
                   );
