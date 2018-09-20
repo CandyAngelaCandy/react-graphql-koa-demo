@@ -23,10 +23,11 @@ export const GET_TODOS = gql`
 `;
 
 export const GET_TODO = gql`
-  query {
-    getTodo(id: "4") {
+  query getTodo($id: ID!) {
+    getTodo(id: $id) {
       id
       text
+      time
       completed
     }
   }

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import TodoContext from './context/TodoContext';
 import { Mutation } from 'react-apollo';
 import { DELETE_TODO, GET_TODOS } from './schema';
+import { Link } from 'react-router-dom';
 
 const TodoList = () => {
   return (
@@ -60,14 +61,16 @@ const TodoList = () => {
                     </td>
                     <td className="text-center">{todo.time}</td>
                     <td className="text-center">
-                      <button
-                        onClick={() => {
-                          // localStorage.setItem('todoId', todo.id);
-                          // hashHistory.push(`/todos/${todo.id}`);
-                        }}
-                      >
-                        detail
-                      </button>
+                      <Link to={'/todo/' + todoId}>
+                        <button
+                          onClick={() => {
+                            // localStorage.setItem('todoId', todo.id);
+                            // hashHistory.push(`/todos/${todo.id}`);
+                          }}
+                        >
+                          detail
+                        </button>
+                      </Link>
                       <Mutation mutation={DELETE_TODO}>
                         {deleteTodo => (
                           <button
