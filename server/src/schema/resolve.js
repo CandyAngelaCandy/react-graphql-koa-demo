@@ -29,7 +29,12 @@ export const createTodo = (_, {input}) => {
 export const updateTodo = (_, {id, input}) => {
 
     return Todo.update({
-        text: input.text
+        text: input.text,
+        completed:input.completed,
+        editable: input.editable,
+        visible: input.visible,
+        deleted: input.deleted,
+        time: input.time,
     }, {
         where: {
             id: id

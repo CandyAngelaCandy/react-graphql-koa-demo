@@ -3,9 +3,8 @@ import { Mutation, Query } from 'react-apollo';
 import TodoList from './TodoList';
 import TodoContext from './context/TodoContext';
 import { CREATE_TODO, GET_TODOS } from './schema';
-import FilterTodoList from './FilterTodoList';
 
-class Todos extends PureComponent {
+class Todo extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -81,7 +80,7 @@ class Todos extends PureComponent {
                 <TodoContext.Provider
                   value={{ todos: todos, filterValue: this.state.filterValue }}
                 >
-                  {this.state.isFileter ? <FilterTodoList /> : <TodoList />}
+                  <TodoList />
                 </TodoContext.Provider>
               </div>
             );
@@ -92,79 +91,4 @@ class Todos extends PureComponent {
   }
 }
 
-const Todo = () => {
-  return (
-    <Fragment>
-      <Query query={GET_TODOS}>
-        {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
-          if (error) return `Error! ${error.message}`;
-          let todos = data.getTodos;
-          return (
-            <div className="header">
-              <h1>todos</h1>
-              <div className="row input-group mb-3">
-                <input
-                  type="text"
-                  ref={el => {
-                    this.filterInput = el;
-                  }}
-                  placeholder="filter todo item"
-                />
-                <button
-                  className="btn btn-info rounded-0"
-                  onClick={() => {
-                    this.setState({
-                      isFileter: true
-                    });
-                  }}
-                >
-                  search
-                </button>
-              </div>
-              <Mutation mutation={CREATE_TODO}>
-                {createTodo => (
-                  <div className="row input-group mb-3">
-                    <input
-                      type="text"
-                      ref={el => {
-                        this.input = el;
-                      }}
-                      placeholder="add todo item"
-                    />
-                    <button
-                      className="btn btn-info rounded-0"
-                      onClick={() => {
-                        createTodo({
-                          variables: {
-                            input: {
-                              text: this.input.value
-                            }
-                          },
-                          refetchQueries: [
-                            {
-                              query: GET_TODOS
-                            }
-                          ]
-                        });
-                      }}
-                    >
-                      add todo
-                    </button>
-                  </div>
-                )}
-              </Mutation>
-              <TodoContext.Provider
-                value={{ todos: todos, filterValue: this.filterInput.value }}
-              >
-                {this.state.isFileter ? <FilterTodoList /> : <TodoList />}
-              </TodoContext.Provider>
-            </div>
-          );
-        }}
-      </Query>
-    </Fragment>
-  );
-};
-
-export default Todos;
+export default Todo;

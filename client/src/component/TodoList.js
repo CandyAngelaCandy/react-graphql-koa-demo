@@ -1,13 +1,17 @@
 import React, { Fragment } from 'react';
 import TodoContext from './context/TodoContext';
 import { Mutation } from 'react-apollo';
-import { DELETE_TODO, GET_TODOS } from './schema';
+import { DELETE_TODO, GET_TODOS, UPDATE_TODO } from './schema';
 import { Link } from 'react-router-dom';
 
 const TodoList = () => {
   return (
     <TodoContext.Consumer>
-      {({ todos }) => {
+      {({ todos, filterValue }) => {
+        todos =
+          filterValue === ''
+            ? todos
+            : todos.filter(todo => todo.text.includes(filterValue));
         return (
           <Fragment>
             <table className="table">
@@ -26,13 +30,30 @@ const TodoList = () => {
                   return (
                     <tr key={todo.id}>
                       <td className="text-center">{todo.id}</td>
+
                       <td className="text-center">
-                        <input
-                          type="checkbox"
-                          onChange={() => {
-                            //this.props.toogleTodo(todo);
-                          }}
-                        />
+                        <Mutation mutation={UPDATE_TODO}>
+                          {updateTodo => (
+                            <input
+                              type="checkbox"
+                              onChange={() => {
+                                updateTodo({
+                                  variables: {
+                                    id: todoId,
+                                    input: {
+                                      completed: true
+                                    }
+                                  },
+                                  refetchQueries: [
+                                    {
+                                      query: GET_TODOS
+                                    }
+                                  ]
+                                });
+                              }}
+                            />
+                          )}
+                        </Mutation>
                       </td>
                       <td className="text-center">
                         {todo.completed ? (
