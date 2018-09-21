@@ -1,19 +1,4 @@
-import {Todo} from "../db/models/Todo";
-
-export const getTodo = (_, {id}) => {
-    return Todo.findAll({
-        where: {
-            id: id
-        }
-    });
-};
-
-
-export const getTodos = () => {
-
-    return Todo.findAll();
-
-};
+import {Todo} from "../../../db/models/Todo";
 
 export const createTodo = (_, {input}) => {
     return Todo.create({
@@ -27,7 +12,6 @@ export const createTodo = (_, {input}) => {
 };
 
 export const updateTodo = (_, {id, input}) => {
-
     return Todo.update({
         text: input.text,
         completed:input.completed,
@@ -40,7 +24,7 @@ export const updateTodo = (_, {id, input}) => {
             id: id
         }
     }).then(() => {
-         return Todo.findAll({
+        return Todo.findAll({
             where: {
                 id: id
             }
@@ -49,7 +33,6 @@ export const updateTodo = (_, {id, input}) => {
 };
 
 export const deleteTodo = (_, {id}) => {
-
     return Todo.destroy({
         where: {
             id: id

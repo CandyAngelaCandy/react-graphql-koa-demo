@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Todo from './component/Todo';
-import TodoDetail from './component/TodoDetail';
+import TodoDetail from './component/Details/TodoDetail';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class App extends Component {

@@ -21,8 +21,6 @@ export const todoType = new GraphQLObjectType({
     }
 });
 
-
-
 export const TodoInput = new GraphQLInputObjectType({
     name: 'TodoInput',
     fields: {

@@ -1,4 +1,4 @@
-import {TodoInput, todoType} from './type';
+import {TodoInput, todoType} from '../../type';
 import {GraphQLID, GraphQLObjectType, GraphQLList} from 'graphql';
 import {createTodo, updateTodo, deleteTodo} from './resolve';
 

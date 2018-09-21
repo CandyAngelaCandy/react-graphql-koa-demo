@@ -116,10 +116,6 @@ const TodoList = () => {
                       <td className="text-center">
                         <Link to={'/todo/' + todoId}>
                           <button
-                            onClick={() => {
-                              // localStorage.setItem('todoId', todo.id);
-                              // hashHistory.push(`/todos/${todo.id}`);
-                            }}
                           >
                             detail
                           </button>
