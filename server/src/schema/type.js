@@ -1,4 +1,3 @@
-// 定义类型
 import {
     GraphQLBoolean,
     GraphQLID,

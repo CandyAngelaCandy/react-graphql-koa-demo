@@ -7,7 +7,6 @@ const queryType = new GraphQLObjectType({
     fields: {
         getTodo: {
             type: new GraphQLList(todoType),
-            // `args` 描述了 `getTodo` 查询接受的参数
             args: {
                 id: {type: GraphQLNonNull(GraphQLID)}
             },

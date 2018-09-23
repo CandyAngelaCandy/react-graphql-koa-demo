@@ -1,7 +1,7 @@
 import {Sequelize} from "sequelize";
-import sequelize from "../connection";
+import sequelize from "../connection/connection";
 
-export let Todo = sequelize.define('todos', {
+export const Todo = sequelize.define('todos', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -17,19 +17,3 @@ export let Todo = sequelize.define('todos', {
 }, {
     timestamps: false
 });
-
-// export let Task = sequelize.define('tasks', {
-//     id: {
-//         type: Sequelize.INTEGER,
-//         primaryKey: true,
-//         autoIncrement: true,
-//         allowNull: false
-//     },
-//     text: Sequelize.STRING(100),
-//     todoId: Sequelize.INTEGER
-// }, {
-//     timestamps: false
-// });
-//
-// Todo.hasMany(Task, {as: 'task', foreignKey: 'todoId'});
-// Task.belongsTo(Todo, {foreignKey: 'todoId'});

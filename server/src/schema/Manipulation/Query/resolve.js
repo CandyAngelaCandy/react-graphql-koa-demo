@@ -10,7 +10,5 @@ export const getTodo = (_, {id}) => {
 
 
 export const getTodos = () => {
-
     return Todo.findAll();
-
 };

@@ -1,9 +1,8 @@
 import React from 'react';
 
-const todoValue = {
+const TodoContext = React.createContext({
   todos: [],
-  filterValue: ''
-};
-
-const TodoContext = React.createContext(todoValue);
+  filterValue: '',
+  getFilterValue: () => {}
+});
 export default TodoContext;

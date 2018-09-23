@@ -1,7 +1,6 @@
 import {Sequelize} from 'sequelize';
-import mysqlConfig from './configs/mysql-config';
+import mysqlConfig from '../configs/mysql-config';
 
-// Create new database connection
 const sequelize = new Sequelize(mysqlConfig.database, mysqlConfig.username, mysqlConfig.password, {
     host: mysqlConfig.host,
     dialect: 'mysql',
@@ -12,8 +11,7 @@ const sequelize = new Sequelize(mysqlConfig.database, mysqlConfig.username, mysq
     }
 });
 
-// Test connection
-console.info('SETUP - Connecting database...')
+console.info('SETUP - Connecting database...');
 
 sequelize
     .authenticate()

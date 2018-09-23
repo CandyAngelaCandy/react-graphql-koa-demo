@@ -1,14 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Query } from 'react-apollo';
 import { GET_TODO } from './schema';
 
-export const QueryBody = ({match}) => {
+export const QueryBody = ({ match }) => {
+  const todoId = match.params.id;
   return (
-    <Query query={GET_TODO} variables={{ id: match.params.id }}>
+    <Query query={GET_TODO} variables={{ id: todoId }}>
       {({ loading, error, data }) => {
         if (loading) return 'Loading...';
         if (error) return `Error! ${error.message}`;
         const todo = data.getTodo[0];
+
         return (
           <table className="table">
             <thead>

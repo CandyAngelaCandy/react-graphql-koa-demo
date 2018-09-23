@@ -22,16 +22,6 @@ export const GET_TODOS = gql`
   }
 `;
 
-export const CREATE_TODO = gql`
-  mutation createTodo($input: TodoInput) {
-    createTodo(input: $input) {
-      id
-      text
-      completed
-    }
-  }
-`;
-
 export const UPDATE_TODO = gql`
   mutation updateTodo($id: ID, $input: TodoInput) {
     updateTodo(id: $id, input: $input) {
