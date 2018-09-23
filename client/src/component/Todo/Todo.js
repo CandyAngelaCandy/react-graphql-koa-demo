@@ -5,6 +5,7 @@ import TodoContext from '../context/TodoContext';
 import { GET_TODOS } from './schema';
 import { TodoSearch } from './TodoSearch';
 import { TodoAdd } from './TodoAdd';
+import TodoStyle from '../../style/TodoStyle.css';
 
 class Todo extends PureComponent {
   state = {
@@ -27,13 +28,15 @@ class Todo extends PureComponent {
 
           return (
             <Fragment>
-              <h1>todos</h1>
-              <TodoContext.Provider
-                value={{ getFilterValue: this.getFilterValue }}
-              >
-                <TodoSearch />
-              </TodoContext.Provider>
-              <TodoAdd />
+              <div className="offset-md-2 col-md-8" id="todoInfo">
+                <h1>todos</h1>
+                <TodoContext.Provider
+                  value={{ getFilterValue: this.getFilterValue }}
+                >
+                  <TodoSearch />
+                </TodoContext.Provider>
+                <TodoAdd />
+              </div>
               <TodoContext.Provider
                 value={{ todos: todos, filterValue: this.state.filterValue }}
               >

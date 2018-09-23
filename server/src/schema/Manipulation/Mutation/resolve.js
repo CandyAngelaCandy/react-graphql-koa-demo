@@ -1,5 +1,21 @@
 import {Todo} from "../../../db/models/Todo";
 
+const handleErrors = (error) => {
+    switch (error.reason) {
+        case "ERRORS.TODO_UPDATE_FAILURE":
+            console.error("todo update failure");
+            break;
+        case "ERRORS.TODO_CREATE_FAILURE":
+            console.error("todo create failure");
+            break;
+        case "ERRORS.TODO_DELETE_FOUND":
+            console.error("todo delete failure");
+            break;
+        default:
+            console.error(error);
+    }
+};
+
 export const createTodo = (_, {input}) => {
     return Todo.create({
         text: input.text,
@@ -8,13 +24,15 @@ export const createTodo = (_, {input}) => {
         visible: false,
         deleted: false,
         time: Date.now(),
+    }).catch((err) => {
+        handleErrors(err);
     });
 };
 
 export const updateTodo = (_, {id, input}) => {
     return Todo.update({
         text: input.text,
-        completed:input.completed,
+        completed: input.completed,
         editable: input.editable,
         visible: input.visible,
         deleted: input.deleted,
@@ -29,6 +47,8 @@ export const updateTodo = (_, {id, input}) => {
                 id: id
             }
         });
+    }).catch((err) => {
+        handleErrors(err);
     });
 };
 
@@ -43,5 +63,7 @@ export const deleteTodo = (_, {id}) => {
                 id: id
             }
         });
+    }).catch((err) => {
+        handleErrors(err);
     });
 };

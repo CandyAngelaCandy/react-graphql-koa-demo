@@ -9,7 +9,7 @@ export const QueryBody = ({ match }) => {
       {({ loading, error, data }) => {
         if (loading) return 'Loading...';
         if (error) return `Error! ${error.message}`;
-        const todo = data.getTodo[0];
+        const todo = data.getTodo;
 
         return (
           <table className="table">

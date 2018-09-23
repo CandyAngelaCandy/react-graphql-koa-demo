@@ -4,18 +4,23 @@ import { Mutation } from 'react-apollo';
 
 export const TodoAdd = () => {
   const addTodoItem = (createTodo, todoText) => {
-    createTodo({
-      variables: {
-        input: {
-          text: todoText
-        }
-      },
-      refetchQueries: [
-        {
-          query: GET_TODOS
-        }
-      ]
-    });
+    if (todoText === '') {
+      alert('please input valid todo content.');
+    } else {
+      createTodo({
+        variables: {
+          input: {
+            text: todoText
+          }
+        },
+        refetchQueries: [
+          {
+            query: GET_TODOS
+          }
+        ]
+      });
+      alert('add todo success');
+    }
   };
 
   return (

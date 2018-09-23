@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="offset-md-3 col-md-8">
+        <div>
           <Route exact path="/todo/" component={Todo} />
           <Route path="/todo/:id" component={TodoDetail} />
         </div>

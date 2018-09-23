@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import TodoContext from '../context/TodoContext';
 import { Head } from './Head';
-import { TodoItem } from './TodoItem';
+import { TodoItem } from '../TodoItem/TodoItem';
 
 const TodoList = () => {
   const filterTodo = (todos, filterValue) => {
@@ -16,7 +16,7 @@ const TodoList = () => {
       {({ todos, filterValue }) => {
         todos = filterTodo(todos, filterValue);
         return (
-          <Fragment>
+          <div className="offset-md-2 col-md-8">
             <table className="table">
               <thead>
                 <Head />
@@ -27,7 +27,7 @@ const TodoList = () => {
                 })}
               </tbody>
             </table>
-          </Fragment>
+          </div>
         );
       }}
     </TodoContext.Consumer>

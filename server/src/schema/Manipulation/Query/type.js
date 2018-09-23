@@ -6,7 +6,7 @@ const queryType = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
         getTodo: {
-            type: new GraphQLList(todoType),
+            type: todoType,
             args: {
                 id: {type: GraphQLNonNull(GraphQLID)}
             },
