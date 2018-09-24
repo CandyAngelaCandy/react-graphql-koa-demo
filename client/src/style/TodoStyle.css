@@ -1,3 +1,7 @@
 #todoInfo {
   padding-left: 32px;
 }
+
+.deleteTodo {
+  margin: 0 10px;
+}

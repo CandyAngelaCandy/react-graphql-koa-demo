@@ -25,6 +25,9 @@ export const initTodoList = todos => {
     };
     todoList.push(todoItem);
   });
-  todoList[todoList.length - 1].color = '#E1FFFF';
+
+  if (todoList.length !== 0) {
+    todoList[todoList.length - 1].color = '#E1FFFF';
+  }
   return todoList;
 };

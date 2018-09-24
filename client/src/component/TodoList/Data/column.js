@@ -8,6 +8,7 @@ export const columns = [
   {
     title: 'id',
     dataIndex: 'id',
+    align: 'center',
     render: (text, record) => {
       return {
         props: {
@@ -20,6 +21,7 @@ export const columns = [
   {
     title: 'completed',
     dataIndex: 'completed',
+    align: 'center',
     render: (text, record) => {
       return {
         props: {
@@ -32,13 +34,20 @@ export const columns = [
   {
     title: 'todo',
     dataIndex: 'text',
+    align: 'center',
     render: (text, record) => {
-      return <TodoText todo={record} />;
+      return {
+        props: {
+          style: { background: record.color }
+        },
+        children: <TodoText todo={record} />
+      };
     }
   },
   {
     title: 'creation time',
     dataIndex: 'time',
+    align: 'center',
     render: (text, record) => {
       return {
         props: {
@@ -51,6 +60,7 @@ export const columns = [
   {
     title: 'action',
     key: 'action',
+    align: 'center',
     render: (text, record) => {
       return {
         props: {

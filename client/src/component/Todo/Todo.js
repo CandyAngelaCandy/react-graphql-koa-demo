@@ -5,7 +5,6 @@ import TodoContext from '../context/TodoContext';
 import { GET_TODOS } from './schema';
 import { TodoSearch } from './TodoSearch';
 import { TodoAdd } from './TodoAdd';
-import TodoStyle from '../../style/TodoStyle.css';
 
 class Todo extends PureComponent {
   state = {

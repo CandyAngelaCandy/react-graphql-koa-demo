@@ -1,11 +1,12 @@
 import React from 'react';
 import { CREATE_TODO, GET_TODOS } from './schema';
 import { Mutation } from 'react-apollo';
+import { message } from 'antd';
 
 export const TodoAdd = () => {
   const addTodoItem = (createTodo, todoText) => {
     if (todoText === '') {
-      alert('please input valid todo content.');
+      message.error('The todo content can not be null!');
     } else {
       createTodo({
         variables: {
@@ -19,7 +20,7 @@ export const TodoAdd = () => {
           }
         ]
       });
-      alert('add todo success');
+      message.success('add todo success');
     }
   };
 

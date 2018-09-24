@@ -1,10 +1,10 @@
 import React from 'react';
 import { Mutation } from 'react-apollo';
 import { DELETE_TODO, GET_TODOS } from './schema';
+import { Popconfirm, message } from 'antd';
 
 export const TodoDelete = ({ todoId }) => {
   const deleteTodoItem = deleteTodo => {
-    alert('delete this todo?');
     deleteTodo({
       variables: {
         id: todoId
@@ -15,19 +15,23 @@ export const TodoDelete = ({ todoId }) => {
         }
       ]
     });
+    message.success('delete success');
   };
 
   return (
     <Mutation mutation={DELETE_TODO}>
       {deleteTodo => (
-        <button
-          onClick={() => {
+        <Popconfirm
+          placement="topLeft"
+          title="delete this todo?"
+          onConfirm={() => {
             deleteTodoItem(deleteTodo);
           }}
-          style={{ margin: '0 10px' }}
+          okText="Yes"
+          cancelText="No"
         >
-          delete
-        </button>
+          <button className="deleteTodo">delete</button>
+        </Popconfirm>
       )}
     </Mutation>
   );

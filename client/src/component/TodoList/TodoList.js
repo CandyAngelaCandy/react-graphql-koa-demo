@@ -5,21 +5,6 @@ import { columns } from './Data/column';
 import { filterTodo, initTodoList } from './Manipulation/TodoAction';
 
 class TodoList extends PureComponent {
-  state = {
-    pagination: {
-      pageSize: 5
-    },
-    todoList: []
-  };
-
-  changeCurrentPage = () => {
-    this.setState({
-      pagination: {
-        current: 3
-      }
-    });
-  };
-
   render() {
     return (
       <TodoContext.Consumer>
@@ -29,13 +14,12 @@ class TodoList extends PureComponent {
 
           return (
             <div className="offset-md-2 col-md-8">
-              <button className="btn btn-link" onClick={this.changeCurrentPage}>
-                View new items
-              </button>
               <Table
                 columns={columns}
                 dataSource={todoList}
-                pagination={this.state.pagination}
+                pagination={{
+                  pageSize: 6
+                }}
                 rowKey={record => record.key}
               />
             </div>
