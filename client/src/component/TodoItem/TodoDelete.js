@@ -1,23 +1,10 @@
 import React from 'react';
 import { Mutation } from 'react-apollo';
-import { DELETE_TODO, GET_TODOS } from './schema';
-import { Popconfirm, message } from 'antd';
+import { DELETE_TODO } from './schema/schema';
+import { Popconfirm } from 'antd';
+import { deleteTodoItem } from './Manipulation/TodoItemAction';
 
 export const TodoDelete = ({ todoId }) => {
-  const deleteTodoItem = deleteTodo => {
-    deleteTodo({
-      variables: {
-        id: todoId
-      },
-      refetchQueries: [
-        {
-          query: GET_TODOS
-        }
-      ]
-    });
-    message.success('delete success');
-  };
-
   return (
     <Mutation mutation={DELETE_TODO}>
       {deleteTodo => (
@@ -25,7 +12,7 @@ export const TodoDelete = ({ todoId }) => {
           placement="topLeft"
           title="delete this todo?"
           onConfirm={() => {
-            deleteTodoItem(deleteTodo);
+            deleteTodoItem(deleteTodo, todoId);
           }}
           okText="Yes"
           cancelText="No"

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import TodoContext from '../context/TodoContext';
 import { Table } from 'antd';
 import { columns } from './Data/column';
-import { filterTodo, initTodoList } from './Manipulation/TodoAction';
+import { filterTodo, initTodoList } from './Manipulation/TodoListAction';
 
 class TodoList extends PureComponent {
   render() {

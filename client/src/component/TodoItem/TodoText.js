@@ -1,40 +1,9 @@
 import React, { Fragment } from 'react';
-import { GET_TODOS, UPDATE_TODO } from './schema';
+import { UPDATE_TODO } from './schema/schema';
 import { Mutation } from 'react-apollo';
+import { updateTodoEdit, updateTodoText } from './Manipulation/TodoItemAction';
 
 export const TodoText = ({ todo }) => {
-  const updateTodoEdit = updateTodo => {
-    updateTodo({
-      variables: {
-        id: todo.id,
-        input: {
-          editable: true
-        }
-      },
-      refetchQueries: [
-        {
-          query: GET_TODOS
-        }
-      ]
-    });
-  };
-
-  const updateTodoText = (e, updateTodo) => {
-    updateTodo({
-      variables: {
-        id: todo.id,
-        input: {
-          text: e.target.innerHTML
-        }
-      },
-      refetchQueries: [
-        {
-          query: GET_TODOS
-        }
-      ]
-    });
-  };
-
   return (
     <Fragment>
       {todo.completed ? (
@@ -48,10 +17,10 @@ export const TodoText = ({ todo }) => {
               contentEditable={todo.editable}
               suppressContentEditableWarning={true}
               onDoubleClick={() => {
-                updateTodoEdit(updateTodo);
+                updateTodoEdit(updateTodo, todo);
               }}
               onBlur={e => {
-                updateTodoText(e, updateTodo);
+                updateTodoText(e, updateTodo, todo);
               }}
             >
               {todo.text}

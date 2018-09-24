@@ -2,9 +2,9 @@ import React, { Fragment, PureComponent } from 'react';
 import { Query } from 'react-apollo';
 import TodoList from '../TodoList/TodoList';
 import TodoContext from '../context/TodoContext';
-import { GET_TODOS } from './schema';
-import { TodoSearch } from './TodoSearch';
-import { TodoAdd } from './TodoAdd';
+import { GET_TODOS } from './schema/schema';
+import { TodoSearch } from './component/TodoSearch';
+import { TodoAdd } from './component/TodoAdd';
 
 class Todo extends PureComponent {
   state = {

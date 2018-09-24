@@ -1,31 +1,16 @@
 import React from 'react';
-import { GET_TODOS, UPDATE_TODO } from './schema';
+import { UPDATE_TODO } from './schema/schema';
 import { Mutation } from 'react-apollo';
+import { updateTodoFinish } from './Manipulation/TodoItemAction';
 
 export const TodoFinishedState = ({ todoId }) => {
-  const updateTodoFinish = updateTodo => {
-    updateTodo({
-      variables: {
-        id: todoId,
-        input: {
-          completed: true
-        }
-      },
-      refetchQueries: [
-        {
-          query: GET_TODOS
-        }
-      ]
-    });
-  };
-
   return (
     <Mutation mutation={UPDATE_TODO}>
       {updateTodo => (
         <input
           type="checkbox"
           onChange={() => {
-            updateTodoFinish(updateTodo);
+            updateTodoFinish(updateTodo, todoId);
           }}
         />
       )}
