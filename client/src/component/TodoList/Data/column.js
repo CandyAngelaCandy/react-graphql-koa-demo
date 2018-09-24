@@ -7,13 +7,26 @@ import { TodoDelete } from '../../TodoItem/TodoDelete';
 export const columns = [
   {
     title: 'id',
-    dataIndex: 'id'
+    dataIndex: 'id',
+    render: (text, record) => {
+      return {
+        props: {
+          style: { background: record.color }
+        },
+        children: <div>{text}</div>
+      };
+    }
   },
   {
     title: 'completed',
     dataIndex: 'completed',
     render: (text, record) => {
-      return <TodoFinishedState todoId={record.id} />;
+      return {
+        props: {
+          style: { background: record.color }
+        },
+        children: <TodoFinishedState todoId={record.id} />
+      };
     }
   },
   {
@@ -25,18 +38,33 @@ export const columns = [
   },
   {
     title: 'creation time',
-    dataIndex: 'time'
+    dataIndex: 'time',
+    render: (text, record) => {
+      return {
+        props: {
+          style: { background: record.color }
+        },
+        children: <div>{text}</div>
+      };
+    }
   },
   {
     title: 'action',
     key: 'action',
-    render: (text, record) => (
-      <Fragment>
-        <Link to={'/todo/' + record.id}>
-          <button>detail</button>
-        </Link>
-        <TodoDelete todoId={record.id} />
-      </Fragment>
-    )
+    render: (text, record) => {
+      return {
+        props: {
+          style: { background: record.color }
+        },
+        children: (
+          <Fragment>
+            <Link to={'/todo/' + record.id}>
+              <button>detail</button>
+            </Link>
+            <TodoDelete todoId={record.id} />
+          </Fragment>
+        )
+      };
+    }
   }
 ];

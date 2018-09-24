@@ -19,9 +19,12 @@ export const initTodoList = todos => {
       id: todo.id,
       completed: todo.completed,
       text: todo.text,
-      time: todo.time
+      time: todo.time,
+      editable: todo.editable,
+      color: '#fff'
     };
     todoList.push(todoItem);
   });
+  todoList[todoList.length - 1].color = '#E1FFFF';
   return todoList;
 };
